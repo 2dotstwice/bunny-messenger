@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\Transport\Receiver\QueueReceiverInterface;
 use Symfony\Component\Messenger\Transport\Serialization\PhpSerializer;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
-class BunnyReceiver implements QueueReceiverInterface, MessageCountAwareInterface
+class BunnyReceiver implements MessageCountAwareInterface
 {
     // Bunny does not segregate application headers from built-in properties.
     // Everything that is not a built-in property is considered a header.

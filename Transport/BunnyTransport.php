@@ -6,13 +6,12 @@ namespace Symfony\Component\Messenger\Bridge\Bunny\Transport;
 
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface;
-use Symfony\Component\Messenger\Transport\Receiver\QueueReceiverInterface;
 use Symfony\Component\Messenger\Transport\Serialization\PhpSerializer;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 use Symfony\Component\Messenger\Transport\SetupableTransportInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 
-class BunnyTransport implements TransportInterface, SetupableTransportInterface, MessageCountAwareInterface, QueueReceiverInterface
+class BunnyTransport implements TransportInterface, SetupableTransportInterface, MessageCountAwareInterface
 {
     private $serializer;
     private $connection;

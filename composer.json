@@ -12,9 +12,9 @@
         }
     ],
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=8.1",
         "symfony/deprecation-contracts": "^2.4",
-        "symfony/messenger": "^5.3",
+        "symfony/messenger": "^4.4",
         "bunny/bunny": "^0.5.0"
     },
     "autoload": {
@@ -24,10 +24,5 @@
         "exclude-from-classmap": [
             "/Tests/"
         ]
-    },
-    "require-dev": {
-        "symfony/property-access": "^4.4|^5.0",
-        "symfony/serializer": "^4.4|^5.0",
-        "phpunit/phpunit": "^9.5"
     }
 }
