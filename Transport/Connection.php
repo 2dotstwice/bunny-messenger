@@ -114,6 +114,13 @@ class Connection
             if (!is_array($queueOptions)) {
                 $queueOptions = [];
             }
+
+            // Ensure no default empty binding key is added when using the more
+            // fine-grained way of adding bindings.
+            if (!isset($queueOptions['binding_keys']) && isset($queueOptions['bindings'])) {
+              $queueOptions['binding_keys'] = [];
+            }
+
             $configuration['queues'][$queueName] = [
                 'passive' => filter_var($queueOptions['passive'] ?? false, FILTER_VALIDATE_BOOLEAN),
                 'durable' => filter_var($queueOptions['durable'] ?? true, FILTER_VALIDATE_BOOLEAN),
@@ -122,6 +129,7 @@ class Connection
                 // There is no "binding without a routing key", it is actually an empty string RK in such case
                 'binding_keys' => $queueOptions['binding_keys'] ?? [''],
                 'binding_arguments' => $queueOptions['binding_arguments'] ?? [],
+                'bindings' => $queueOptions['bindings'] ?? [''],
             ];
 
             // Some arguments must be integers. Cast them in case they were defined via DSN
@@ -306,6 +314,20 @@ class Connection
                     $queueConfig['binding_arguments']
                 );
             }
+
+            // Alternative way to set up bindings, which allows for a more
+            // fine-grained configuration of arguments per binding.
+            $bindings = $queueConfig['bindings'];
+            foreach ($bindings as $binding) {
+              $channel->queueBind(
+                $queueName,
+                $this->configuration['exchange']['name'],
+                $binding['routing_key'],
+                false,
+                $binding['arguments']
+              );
+            }
+
         }
     }
 
