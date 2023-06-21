@@ -98,7 +98,7 @@ class Connection
             'arguments' => $options['exchange']['arguments'] ?? [],
         ];
 
-        if (!in_array($configuration['exchange']['type'], ['direct', 'fanout', 'topic'])) {
+        if (!in_array($configuration['exchange']['type'], ['direct', 'fanout', 'topic', 'headers'])) {
             throw new InvalidArgumentException(sprintf('The given exchange type "%s" is invalid.', $configuration['exchange']['type']));
         }
 
